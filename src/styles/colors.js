@@ -17,6 +17,14 @@ export const fontSize = {
   lg: '1.5rem',
 };
 
+export const iconSize = {
+  xs: '0.75rem',
+  sm: '1rem',
+  base: '1.25rem',
+  md: '1.5rem',
+  lg: '1.75rem',
+};
+
 export const badgeColor = {
   new: '#79E0B0',
   youtube: '#ff0000',

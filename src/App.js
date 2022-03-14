@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { IPhoneSE } from 'react-device-mockups';
 import 'html5-device-mockups/dist/device-mockups.min.css';
@@ -8,10 +8,13 @@ import { reset } from './styles/reset';
 import styled from '@emotion/styled';
 import { ContentBox } from './styles/styles';
 import Thumbnail from './components/Thumbnail';
-import { backgroundColor } from './styles/colors';
+import { backgroundColor, fontSize, iconSize } from './styles/colors';
 import Subscription from './components/Subscribe';
+import LikeShare from './components/LikeShare';
 
 function App() {
+  const [likeCount, setLikeCount] = useState(0);
+
   return (
     <>
       <Global styles={reset} />
@@ -31,6 +34,20 @@ function App() {
                 <Thumbnail src="https://cdn-images-1.medium.com/max/800/1*OBA2wnz9g7IMXoi0sf9ltQ.jpeg" />
               </ContentBox>
               <Subscription />
+              <LikeShare />
+              <LikeShare
+                likeText={'좋아요'}
+                shareText={'공유하기'}
+                fontSize={fontSize.sm}
+                iconSize={iconSize.sm}
+              />
+              <LikeShare
+                likeText={likeCount}
+                setLikeCount={setLikeCount}
+                shareText={'공유하기'}
+                fontSize={fontSize.xs}
+                iconSize={iconSize.xs}
+              />
             </ContentContainer>
           </Page>
         </IPhoneSE>
