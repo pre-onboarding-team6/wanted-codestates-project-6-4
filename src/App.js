@@ -12,10 +12,11 @@ import { fetchData } from './redux/reducers/infoDataReducer';
 import SlidingPage from './components/SlidingPage';
 import Tabs from './components/Tabs';
 import loader from './assets/loader.png';
+import ErrorPage from './components/ErrorPage';
 
 function App() {
   const dispatch = useDispatch();
-  const { data, loading } = useSelector((state) => state.infoData);
+  const { data, loading, error } = useSelector((state) => state.infoData);
   const [tab, setTab] = useState(0);
 
   useEffect(() => {
@@ -46,6 +47,8 @@ function App() {
                   <LoaderImage src={loader} alt="loading" />
                 </LoaderBox>
               </LoaderContainer>
+            ) : error ? (
+              <ErrorPage error={error} />
             ) : (
               <>
                 <Tabs setTab={setTab} sector={data.sector} />
