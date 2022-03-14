@@ -7,9 +7,11 @@ import { Global } from '@emotion/react';
 import { reset } from './styles/reset';
 import styled from '@emotion/styled';
 import { backgroundColor } from './styles/colors';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from './redux/reducers/infoDataReducer';
 import SlidingPage from './components/SlidingPage';
+
 import Tabs from './components/Tabs';
 import loader from './assets/loader.png';
 import ErrorPage from './components/ErrorPage';
