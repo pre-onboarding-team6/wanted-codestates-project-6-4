@@ -5,8 +5,8 @@ export default function Like({ width, height }) {
     <svg
       viewBox="0 -2 35 35"
       xmlns="http://www.w3.org/2000/svg"
-      width={width || '24px'}
-      height={height || '24px'}
+      width={width || '2.2rem'}
+      height={height || '2.2rem'}
       fill="#909090"
     >
       <defs>

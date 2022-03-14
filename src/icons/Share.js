@@ -4,8 +4,8 @@ export default function Share({ width, height }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={width || '1.5rem'}
-      height={height || '1.5rem'}
+      width={width || '2.2rem'}
+      height={height || '2.2rem'}
       viewBox="3 -3 20 27"
       fill="none"
       stroke="#909090"

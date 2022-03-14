@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import styled from '@emotion/styled';
+
 import LikeFull from '../icons/LikeFull';
 import Like from '../icons/Like';
 import Share from '../icons/Share';
-import styled from '@emotion/styled';
 import { textColor } from '../styles/colors';
 
 export default function LikeShare({
@@ -10,6 +11,7 @@ export default function LikeShare({
   shareText,
   fontSize,
   iconSize,
+  link,
   setLikeCount,
 }) {
   const [like, setLike] = useState(false);
@@ -17,6 +19,10 @@ export default function LikeShare({
   const likeContents = () => {
     setLike((prev) => !prev);
     setLikeCount && setLikeCount((prev) => (like ? prev - 1 : prev + 1));
+  };
+
+  const openContents = () => {
+    window.open(link);
   };
 
   return (
@@ -31,7 +37,7 @@ export default function LikeShare({
       <Label htmlFor="likeBtn" textSize={fontSize}>
         {likeText}
       </Label>
-      <ShareIcon id="shareBtn">
+      <ShareIcon id="shareBtn" onClick={openContents}>
         <Share width={iconSize} height={iconSize} />
       </ShareIcon>
       <Label htmlFor="likeBtn" textSize={fontSize}>

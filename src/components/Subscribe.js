@@ -16,7 +16,7 @@ const Subscription = (props) => {
       </TextBox>
       <SubscribeBtn
         color={buttonColor.primary}
-        fontSize={fontSize.xxs}
+        fontSize={fontSize.base}
         onClick={openLink}
       >
         구독하기
@@ -28,7 +28,8 @@ const Subscription = (props) => {
 export default Subscription;
 
 const SubscriptionComponent = styled(ContentBox)`
-  margin-top: 1rem;
+  margin: 1rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,18 +41,17 @@ const TextBox = styled.div`
   flex-direction: column;
 `;
 
-const SubscribeBtn = styled(Subscribe)`
-  width: 55px;
-  height: 26px;
-`;
-
 const InfoText = styled.span`
-  font-size: ${fontSize.xxs};
+  font-size: ${fontSize.base};
   color: ${textColor.secondary};
 `;
 
 const Title = styled.span`
-  margin-top: 0.25rem;
-  font-size: ${fontSize.base};
+  margin-top: 0.5rem;
+  font-size: ${fontSize.lg};
   color: ${buttonColor.primary};
+`;
+
+const SubscribeBtn = styled(Subscribe)`
+  width: 100px;
 `;
