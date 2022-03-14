@@ -1,11 +1,10 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { fontSize, badgeColor, buttonColor } from '../styles/colors';
 import { Badge, ContentBox } from '../styles/styles';
 
-// sector = youtube, opinion, insight
+// sectorId / 1 = opinion, 2 = youtube, 3 = insight
 const MoreContents = ({ sectorId }) => {
   const {
     data: { content: contents },
@@ -16,7 +15,7 @@ const MoreContents = ({ sectorId }) => {
   const [sectorContents, setSectorContents] = useState([]);
   const [spread, setSpread] = useState(false);
 
-  // title 설정
+  // title 및 badge 이름 설정
   useEffect(() => {
     console.log(sectorId);
     if (sectorId === 2) {
