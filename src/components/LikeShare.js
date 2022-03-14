@@ -25,14 +25,12 @@ export default function LikeShare({
   fontSize,
   iconSize,
   content,
-  setLikeCount,
 }) {
   const [like, setLike] = useState(false);
   const dispatch = useDispatch();
 
   const likeContents = () => {
     setLike((prev) => !prev);
-    console.log(content);
     if (like) {
       dispatch(decreaseLike({ content }));
     } else {

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { showDetail } from '../redux/reducers/infoDataReducer';
 import Thumbnail from './Thumbnail';
 
-const SlidingContent = ({ item }, ref) => {
+export default forwardRef(function SlidingContent({ item }, ref) {
   const dispatch = useDispatch();
   const handleShowDetail = () => {
     dispatch(
@@ -36,9 +36,7 @@ const SlidingContent = ({ item }, ref) => {
       </ContentTitle>
     </Container>
   );
-};
-
-export default forwardRef(SlidingContent);
+});
 
 const Container = styled.div`
   display: flex;

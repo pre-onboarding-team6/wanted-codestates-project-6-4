@@ -7,7 +7,7 @@ import { Badge, ContentBox } from '../styles/styles';
 import LikeShare from './LikeShare';
 
 // sectorId / 1 = opinion, 2 = youtube, 3 = insight
-const MoreContents = ({ page }) => {
+export default function MoreContents({ page }) {
   const [section, setSection] = useState('');
   const [badge, setBadge] = useState('');
   const [sectorContents, setSectorContents] = useState([]);
@@ -86,7 +86,7 @@ const MoreContents = ({ page }) => {
       <Button onClick={showMore}>{spread ? '접기' : '더보기'}</Button>
     </ContentBox>
   );
-};
+}
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -143,5 +143,3 @@ const Button = styled.button`
   cursor: pointer;
   margin-top: 10px;
 `;
-
-export default MoreContents;
