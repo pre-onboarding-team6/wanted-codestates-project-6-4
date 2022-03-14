@@ -24,7 +24,7 @@ const MoreContents = ({ sector }) => {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          'https://cors-proxy-server11.herokuapp.com/https://test.daground.io/info/contents',
+          'https://cors-anywhere.herokuapp.com/corsdemo/https://test.daground.io/info/contents',
           {
             cache: 'default',
             headers: {
