@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { showDetail } from '../redux/reducers/infoDataReducer';
 import { fontSize, badgeColor, buttonColor } from '../styles/colors';
 import { Badge, ContentBox } from '../styles/styles';
+import LikeShare from './LikeShare';
 
 // sectorId / 1 = opinion, 2 = youtube, 3 = insight
 const MoreContents = ({ page }) => {
@@ -61,29 +62,26 @@ const MoreContents = ({ page }) => {
           {badge}
         </Badge>
       </TitleWrapper>
-      {sectorContents.map(
-        ({ id, image, like_cnt, link, title, upload_date, sector_id }, index) =>
-          index > 2 ? (
-            <ContentWrapper
-              key={id}
-              onClick={() => handleShowDetail(sector_id, id)}
+      {sectorContents.map((content, index) =>
+        index > 2 ? (
+          <ContentWrapper key={content.id}>
+            <ImgBox
+              onClick={() => handleShowDetail(content.sector_id, content.id)}
             >
-              <ImgBox>
-                <img src={image} alt={title} />
-              </ImgBox>
-              <OtherBox>
-                <DateSpan>{upload_date}</DateSpan>
-                <Icons>
-                  <HeartBox>🤍{like_cnt}</HeartBox>
-                  <ShareBox>
-                    <a href="https://sandbank.io" target="blank">
-                      💌공유하기
-                    </a>
-                  </ShareBox>
-                </Icons>
-              </OtherBox>
-            </ContentWrapper>
-          ) : null,
+              <img src={content.image} alt={content.title} />
+            </ImgBox>
+            <OtherBox>
+              <DateSpan>{content.upload_date}</DateSpan>
+              <LikeShare
+                likeText={content.like_cnt}
+                shareText={'공유하기'}
+                fontSize={fontSize.sm}
+                iconSize={fontSize.sm}
+                content={content}
+              />
+            </OtherBox>
+          </ContentWrapper>
+        ) : null,
       )}
       <Button onClick={showMore}>{spread ? '접기' : '더보기'}</Button>
     </ContentBox>
@@ -101,7 +99,6 @@ const Title = styled.h2`
   font-size: ${fontSize.md};
   margin-right: 0.8rem;
   white-space: nowrap;
-  letter-spacing: -3px;
 `;
 
 const ContentWrapper = styled.div`
@@ -123,25 +120,15 @@ const OtherBox = styled.div`
   font-size: ${fontSize.sm};
   color: #ccc;
   margin: 0.25rem 0 0.5rem;
+  align-items: center;
 
   @media (max-width: 335px) {
     flex-direction: column;
   }
 `;
 
-const DateSpan = styled.span``;
-
-const Icons = styled.div``;
-
-const HeartBox = styled.span`
-  margin-right: 8px;
-`;
-
-const ShareBox = styled.span`
-  a {
-    color: #ccc;
-    text-decoration: none;
-  }
+const DateSpan = styled.span`
+  font-size: ${fontSize.sm};
 `;
 
 const Button = styled.button`
