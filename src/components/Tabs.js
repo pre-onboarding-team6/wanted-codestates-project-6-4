@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useCallback, useEffect, useState } from 'react';
-import { buttonColor } from '../styles/colors';
+import { buttonColor, fontSize } from '../styles/colors';
 
 export default function Tabs({ setTab, sector }) {
   const [showBottom, setShowBottom] = useState(false);
@@ -62,12 +62,14 @@ const TabsDiv = styled.div`
 const TabDiv = styled.button`
   display: inline-flex;
   justify-content: center;
+  white-space: nowrap;
   width: 25%;
   padding: 1.25rem;
   border: none;
   cursor: pointer;
   background-color: transparent;
   overflow: hidden;
+  font-size: ${fontSize.sm};
 `;
 
 const TabBottom = styled.div`
