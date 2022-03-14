@@ -17,7 +17,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 188px;
+  width: 100%;
   padding: 3px;
 `;
 

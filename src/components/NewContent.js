@@ -18,8 +18,8 @@ export default NewContent;
 
 const Container = styled(ContentBox)`
   font-size: 12px;
-  width: 220px;
-  height: 250px;
+  width: 100%;
+  height: fit-content;
 `;
 
 const Title = styled.div`

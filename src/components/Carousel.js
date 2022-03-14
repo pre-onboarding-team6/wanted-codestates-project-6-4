@@ -4,14 +4,14 @@ import { badgeColor, buttonColor } from '../styles/colors';
 import SlidingContent from './SlidingContent';
 
 const Carousel = () => {
-  const carouselLength = 3;
+  const sliderLength = 3;
   const itemRef = useRef(null);
   const [currentItem, setCurrentItem] = useState(0);
 
   useEffect(() => {
     const autoSilde = setInterval(() => {
       setCurrentItem((prev) => {
-        if (prev === carouselLength - 1) {
+        if (prev === sliderLength - 1) {
           return 0;
         } else {
           return prev + 1;
@@ -25,7 +25,9 @@ const Carousel = () => {
 
   useEffect(() => {
     itemRef.current.style.transition = 'all 0.5s';
-    itemRef.current.style.transform = `translateX(-${currentItem * 188}px)`;
+    itemRef.current.style.transform = `translateX(-${
+      (currentItem * 100) / sliderLength
+    }%)`;
   }, [currentItem]);
 
   const scrollToItem = (idx) => {
@@ -35,7 +37,7 @@ const Carousel = () => {
   return (
     <Container>
       <SlideContainer>
-        <SliderItems ref={itemRef}>
+        <SliderItems ref={itemRef} sliderLength={sliderLength}>
           {[0, 0, 0].map((item, idx) => (
             <SlidingContent key={idx} />
           ))}
@@ -58,28 +60,32 @@ const Carousel = () => {
 
 export default Carousel;
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
 
 const SlideContainer = styled.div`
   overflow: hidden;
-  width: 188px;
-  height: 150px;
 `;
 
 const SliderItems = styled.div`
   display: flex;
-  width: fit-content;
+  width: ${(props) => `${props.sliderLength * 100}%`};
 `;
 
 const ButtonContainer = styled.div`
-  margin-top: 10px;
+  width: 100%;
+  margin-top: 1.1rem;
 `;
 
 const Indicator = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 30px;
+  width: 2rem;
 `;
 
 const Index = styled.div`
