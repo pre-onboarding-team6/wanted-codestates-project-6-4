@@ -5,6 +5,7 @@ import { exitDetail } from '../redux/reducers/infoDataReducer';
 import { ContentBox } from '../styles/styles';
 import NewContent from './NewContent';
 import MoreContents from './MoreContents';
+import Subscription from './Subscribe';
 import Thumbnail from './Thumbnail';
 
 export default function SlidingPage({ tab }) {
@@ -44,21 +45,26 @@ export default function SlidingPage({ tab }) {
               {!page.nowShoing ? (
                 <>
                   <NewContent news={page.news} />
+                  <Subscription />
+                  <MoreContents page={page} />
                 </>
               ) : (
-                <ContentBox>
-                  <div>{page.nowShoing} 보는중</div>
-                  <Thumbnail src="https://cdn-images-1.medium.com/max/800/1*OBA2wnz9g7IMXoi0sf9ltQ.jpeg" />
-                  <button
-                    onClick={() => {
-                      handleExitDetail(page.sector_id);
-                    }}
-                  >
-                    나가기
-                  </button>
-                </ContentBox>
+                <>
+                  <ContentBox>
+                    <div>id: {page.nowShoing}</div>
+                    <div>디테일 페이지 보는중</div>
+                    <button
+                      onClick={() => {
+                        handleExitDetail(page.sector_id);
+                      }}
+                    >
+                      나가기
+                    </button>
+                  </ContentBox>
+                  <MoreContents page={page} />
+                  <Subscription />
+                </>
               )}
-              <MoreContents sectorId={index + 1} />
             </AbsoluteScrollView>
           </RelateView>
         ))}

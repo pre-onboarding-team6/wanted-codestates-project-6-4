@@ -70,6 +70,10 @@ const TabDiv = styled.button`
   background-color: transparent;
   overflow: hidden;
   font-size: ${fontSize.sm};
+  transition: 0.1s;
+  &:active {
+    opacity: 0.5;
+  }
 `;
 
 const TabBottom = styled.div`

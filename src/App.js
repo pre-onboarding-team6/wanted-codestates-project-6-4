@@ -22,7 +22,6 @@ function App() {
     (state) => state.infoData,
   );
   const [tab, setTab] = useState(0);
-  console.log(pages);
 
   useEffect(() => {
     dispatch(fetchData());

@@ -28,7 +28,7 @@ const Subscription = (props) => {
 export default Subscription;
 
 const SubscriptionComponent = styled(ContentBox)`
-  margin: 1rem;
+  margin: 1rem 0;
   padding: 1.5rem;
   display: flex;
   flex-direction: row;
