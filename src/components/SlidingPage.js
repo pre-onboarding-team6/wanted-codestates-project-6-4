@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { exitDetail } from '../redux/reducers/infoDataReducer';
 import { ContentBox } from '../styles/styles';
 import NewContent from './NewContent';
+import MoreContents from './MoreContents';
 import Thumbnail from './Thumbnail';
 
 export default function SlidingPage({ tab }) {
@@ -57,6 +58,7 @@ export default function SlidingPage({ tab }) {
                   </button>
                 </ContentBox>
               )}
+              <MoreContents sectorId={index + 1} />
             </AbsoluteScrollView>
           </RelateView>
         ))}
