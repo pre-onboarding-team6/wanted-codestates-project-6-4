@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const PROXY = 'https://cors-anywhere.herokuapp.com';
 const BASE_URL = 'https://test.daground.io';
@@ -6,6 +6,7 @@ const BASE_URL = 'https://test.daground.io';
 const initialState = {
   data: undefined,
   loading: true,
+  error: undefined,
 };
 
 export const fetchData = createAsyncThunk(
@@ -43,6 +44,11 @@ export const infoDataReducer = createSlice({
       })
       .addCase(fetchData.rejected, (state, action) => {
         console.warn(action, 'error');
+        state.loading = false;
+        state.error = {
+          message: action.error.message,
+          stack: action.error.stack,
+        };
       });
   },
 });
