@@ -8,6 +8,7 @@ const MoreContents = ({ sector }) => {
   const [sectorContents, setSectorContents] = useState([]);
   const [spread, setSpread] = useState(false);
 
+  // title 설정
   useEffect(() => {
     if (sector === 'youtube') {
       setSection('블록체인 NOW');
@@ -33,7 +34,6 @@ const MoreContents = ({ sector }) => {
           },
         );
         const data = await res.json();
-        console.log(data.content);
         setContents(data.content);
       } catch (error) {
         console.error(error);
@@ -66,12 +66,11 @@ const MoreContents = ({ sector }) => {
   }, [sector, contents, spread]);
 
   const gotoDetail = (link, sectorId) => {
+    // go to Detail
     const url =
       sectorId === 2 ? `https://www.youtube.com/watch?v=${link}` : link;
 
     console.log(url);
-
-    // gotoDetail
   };
 
   const showMore = () => {
