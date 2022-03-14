@@ -9,6 +9,7 @@ import styled from '@emotion/styled';
 import { ContentBox } from './styles/styles';
 import Thumbnail from './components/Thumbnail';
 import { backgroundColor } from './styles/colors';
+import Subscription from './components/Subscribe';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 <div>새로 올라왔어요</div>
                 <Thumbnail src="https://cdn-images-1.medium.com/max/800/1*OBA2wnz9g7IMXoi0sf9ltQ.jpeg" />
               </ContentBox>
+              <Subscription />
             </ContentContainer>
           </Page>
         </IPhoneSE>
