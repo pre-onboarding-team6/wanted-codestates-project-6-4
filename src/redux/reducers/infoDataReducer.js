@@ -17,8 +17,19 @@ export const fetchData = createAsyncThunk(
         'TEST-AUTH': 'wantedpreonboarding',
       },
     });
-    const data = await res.json();
-    return data;
+    if (res.status === 200) {
+      const contentType = res.headers.get('content-type');
+      if (contentType === 'application/json; charset=utf-8') {
+        const data = await res.json();
+        return data;
+      } else {
+        throw new Error('Sorry, Something is wrong');
+      }
+    } else if (res.status === 429) {
+      throw new Error('To Many Requests');
+    } else {
+      throw new Error('Sorry, Something is wrong');
+    }
   },
 );
 
@@ -33,17 +44,12 @@ export const infoDataReducer = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
-        if (action.payload.ok === true) {
-          state.data = {
-            sector: action.payload.sector,
-            content: action.payload.content,
-          };
-        } else {
-          console.warn('Sorry something is wrong');
-        }
+        state.data = {
+          sector: action.payload.sector,
+          content: action.payload.content,
+        };
       })
       .addCase(fetchData.rejected, (state, action) => {
-        console.warn(action, 'error');
         state.loading = false;
         state.error = {
           message: action.error.message,
