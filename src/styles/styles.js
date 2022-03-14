@@ -14,12 +14,9 @@ export const Badge = styled.button`
   padding: 2px 6px;
   height: auto;
   background-color: ${(props) => props.color};
-  display: flex;
   border: none;
   color: white;
   border-radius: 4px;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const Subscribe = styled.button`
@@ -32,6 +29,7 @@ export const Subscribe = styled.button`
   color: ${(props) => (props.font ? props.font : 'white')};
   border-radius: 15px;
   font-weight: 600;
+  font-size: ${(props) => props.fontSize};
   cursor: pointer;
   &:hover {
     opacity: 0.7;
