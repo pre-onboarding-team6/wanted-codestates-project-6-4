@@ -1,56 +1,44 @@
 import styled from '@emotion/styled';
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { fontSize, badgeColor, buttonColor } from '../styles/colors';
+import { Badge, ContentBox } from '../styles/styles';
 
-// sector = youtube, opinion, insight
-const MoreContents = ({ sector }) => {
-  const [section, setSection] = useState();
-  const [contents, setContents] = useState([]);
+// sectorId / 1 = opinion, 2 = youtube, 3 = insight
+const MoreContents = ({ sectorId }) => {
+  const {
+    data: { content: contents },
+  } = useSelector((state) => state.infoData);
+
+  const [section, setSection] = useState('');
+  const [badge, setBadge] = useState('');
   const [sectorContents, setSectorContents] = useState([]);
   const [spread, setSpread] = useState(false);
 
-  // title 설정
+  // title 및 badge 이름 설정
   useEffect(() => {
-    if (sector === 'youtube') {
+    console.log(sectorId);
+    if (sectorId === 2) {
       setSection('블록체인 NOW');
-    } else if (sector === 'opinion') {
+      setBadge('Youtube');
+    } else if (sectorId === 1) {
       setSection('알쓸B잡');
+      setBadge('News');
     } else {
       setSection('어떻게 투자할까');
+      setBadge('Report');
     }
-  }, [sector]);
-
-  // data fetching
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(
-          'https://cors-anywhere.herokuapp.com/corsdemo/https://test.daground.io/info/contents',
-          {
-            cache: 'default',
-            headers: {
-              'Cache-Control': 'max-age=' + 3000,
-              'TEST-AUTH': 'wantedpreonboarding',
-            },
-          },
-        );
-        const data = await res.json();
-        setContents(data.content);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [sector]);
+  }, [sectorId]);
 
   // sector에 따라 filtering
   useEffect(() => {
-    if (sector === 'youtube') {
+    if (sectorId === 2) {
       setSectorContents(
         spread
           ? contents.filter((content) => content.sector_id === 2)
           : contents.filter((content) => content.sector_id === 2).slice(0, 6),
       );
-    } else if (sector === 'opinion') {
+    } else if (sectorId === 1) {
       setSectorContents(
         spread
           ? contents.filter((content) => content.sector_id === 1)
@@ -63,7 +51,7 @@ const MoreContents = ({ sector }) => {
           : contents.filter((content) => content.sector_id === 3).slice(0, 6),
       );
     }
-  }, [sector, contents, spread]);
+  }, [sectorId, contents, spread]);
 
   const gotoDetail = (link, sectorId) => {
     // go to Detail
@@ -78,10 +66,20 @@ const MoreContents = ({ sector }) => {
   };
 
   return (
-    <Container>
+    <ContentBox>
       <TitleWrapper>
         <Title>{section}</Title>
-        <span>Youtube</span>
+        <Badge
+          color={
+            sectorId === 1
+              ? badgeColor.news
+              : sectorId === 2
+              ? badgeColor.youtube
+              : badgeColor.report
+          }
+        >
+          {badge}
+        </Badge>
       </TitleWrapper>
       {sectorContents.map(
         ({ id, image, like_cnt, link, title, upload_date, sector_id }, index) =>
@@ -108,38 +106,31 @@ const MoreContents = ({ sector }) => {
           ) : null,
       )}
       <Button onClick={showMore}>{spread ? '접기' : '더보기'}</Button>
-    </Container>
+    </ContentBox>
   );
 };
-
-const Container = styled.div`
-  background-color: white;
-  border-radius: 5px;
-  width: 100%;
-  padding: 15px 10px;
-`;
 
 const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 `;
 
 const Title = styled.h2`
   font-weight: bold;
-  font-size: 16px;
-  margin-right: 12px;
+  font-size: ${fontSize.md};
+  margin-right: 0.8rem;
+  white-space: nowrap;
+  letter-spacing: -3px;
 `;
 
 const ContentWrapper = styled.div`
-  padding: 5px 10px;
+  padding: 0.1rem 0.25rem;
   cursor: default;
 `;
 
 const ImgBox = styled.div`
   width: 100%;
-  margin-bottom: 5px;
-
   img {
     width: 100%;
     height: 100%;
@@ -149,8 +140,9 @@ const ImgBox = styled.div`
 const OtherBox = styled.div`
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: ${fontSize.sm};
   color: #ccc;
+  margin: 0.25rem 0 0.5rem;
 
   @media (max-width: 335px) {
     flex-direction: column;
@@ -174,10 +166,10 @@ const ShareBox = styled.span`
 
 const Button = styled.button`
   width: 100%;
-  font-size: 16px;
+  font-size: ${fontSize.md};
   font-weight: bold;
-  color: blue;
-  background-color: lightblue;
+  color: ${buttonColor.primary};
+  background-color: ${buttonColor.secondary};
   border-radius: 15px;
   border: none;
   padding: 5px;

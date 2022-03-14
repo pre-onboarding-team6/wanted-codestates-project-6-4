@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { ContentBox } from '../styles/styles';
+import MoreContents from './MoreContents';
 import Thumbnail from './Thumbnail';
 
 class Page {
@@ -80,6 +81,7 @@ export default function SlidingPage({ tab, sector, content }) {
                   </button>
                 </ContentBox>
               )}
+              <MoreContents sectorId={index + 1} />
             </AbsoluteScrollView>
           </RelateView>
         ))}
