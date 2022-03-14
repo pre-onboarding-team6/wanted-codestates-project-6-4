@@ -6,6 +6,9 @@ import 'html5-device-mockups/dist/device-mockups.min.css';
 import { Global } from '@emotion/react';
 import { reset } from './styles/reset';
 import styled from '@emotion/styled';
+import { ContentBox } from './styles/styles';
+import Thumbnail from './components/Thumbnail';
+import { backgroundColor } from './styles/colors';
 
 function App() {
   return (
@@ -18,16 +21,16 @@ function App() {
             onClick: () => alert('Home Button Clicked!'),
           }}
         >
-          {/* 탭 컨테이너를 여기에 담습니다 */}
-          <iframe
-            title="showcase"
-            src="https://example.com"
-            style={{
-              width: '100%',
-              height: '100%',
-              margin: 0,
-            }}
-          />
+          <Page>
+            {/* 헤더 */}
+            {/* 내부 */}
+            <ContentContainer>
+              <ContentBox>
+                <div>새로 올라왔어요</div>
+                <Thumbnail src="https://cdn-images-1.medium.com/max/800/1*OBA2wnz9g7IMXoi0sf9ltQ.jpeg" />
+              </ContentBox>
+            </ContentContainer>
+          </Page>
         </IPhoneSE>
       </AppContainer>
     </>
@@ -40,4 +43,18 @@ const AppContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 2rem;
+`;
+
+const Page = styled.div`
+  background-color: ${backgroundColor.primary};
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+`;
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1rem;
 `;
