@@ -18,7 +18,7 @@ export default NewContent;
 
 const Container = styled(ContentBox)`
   font-size: 12px;
-  width: 220px;
+  width: 100%;
   height: 250px;
 `;
 
