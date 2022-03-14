@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
-import { badgeColor, buttonColor } from '../styles/colors';
+import { badgeColor, buttonColor, fontSize } from '../styles/colors';
+import LikeShare from './LikeShare';
 import SlidingContent from './SlidingContent';
 
 const Carousel = ({ items }) => {
   const sliderLength = items.length;
   const itemRef = useRef(null);
   const [currentItem, setCurrentItem] = useState(0);
+  const [content, setCurrentContent] = useState(items[0]);
 
   useEffect(() => {
     const autoSilde = setInterval(() => {
@@ -48,11 +50,19 @@ const Carousel = ({ items }) => {
           {items.map((item, idx) => (
             <Index
               key={idx}
-              onClick={() => scrollToItem(idx)}
+              onClick={() => {
+                scrollToItem(idx);
+                setCurrentContent(item);
+              }}
               isShow={currentItem === idx}
             />
           ))}
         </Indicator>
+        <LikeShare
+          fontSize={fontSize.lg}
+          iconSize={fontSize.lg}
+          content={content}
+        />
       </ButtonContainer>
     </Container>
   );
@@ -78,6 +88,9 @@ const SliderItems = styled.div`
 `;
 
 const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin-top: 1.1rem;
 `;
@@ -87,6 +100,7 @@ const Indicator = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 2rem;
+  height: 10px;
 `;
 
 const Index = styled.div`

@@ -87,6 +87,56 @@ export const infoDataReducer = createSlice({
       });
       state.pages = newPages;
     },
+    increaseLike: (state, action) => {
+      const { content } = action.payload;
+      const { pages } = current(state);
+      const newPages = pages.map((page) => {
+        if (page.sector_id === content.sector_id) {
+          const newContent = page.content.map((contentItem) => {
+            if (contentItem.id === content.id) {
+              const newContentItem = {
+                ...content,
+                like_cnt: contentItem.like_cnt + 1,
+              };
+              console.log(newContentItem);
+              return newContentItem;
+            } else {
+              return contentItem;
+            }
+          });
+          const newPage = { ...page, content: newContent };
+          return newPage;
+        } else {
+          return page;
+        }
+      });
+      state.pages = newPages;
+    },
+    decreaseLike: (state, action) => {
+      const { content } = action.payload;
+      const { pages } = current(state);
+      const newPages = pages.map((page) => {
+        if (page.sector_id === content.sector_id) {
+          const newContent = page.content.map((contentItem) => {
+            if (contentItem.id === content.id) {
+              const newContentItem = {
+                ...content,
+                like_cnt: contentItem.like_cnt - 1,
+              };
+              console.log(newContentItem);
+              return newContentItem;
+            } else {
+              return contentItem;
+            }
+          });
+          const newPage = { ...page, content: newContent };
+          return newPage;
+        } else {
+          return page;
+        }
+      });
+      state.pages = newPages;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -115,6 +165,7 @@ export const infoDataReducer = createSlice({
   },
 });
 
-export const { showDetail, exitDetail } = infoDataReducer.actions;
+export const { showDetail, exitDetail, increaseLike, decreaseLike } =
+  infoDataReducer.actions;
 
 export default infoDataReducer.reducer;

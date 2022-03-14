@@ -5,6 +5,8 @@ import LikeFull from '../icons/LikeFull';
 import Like from '../icons/Like';
 import Share from '../icons/Share';
 import { textColor } from '../styles/colors';
+import { decreaseLike, increaseLike } from '../redux/reducers/infoDataReducer';
+import { useDispatch } from 'react-redux';
 
 // 새로 올라왔어요 컴포넌트는 기본으로 사용 <LikeShare />
 
@@ -22,18 +24,24 @@ export default function LikeShare({
   shareText,
   fontSize,
   iconSize,
-  link,
+  content,
   setLikeCount,
 }) {
   const [like, setLike] = useState(false);
+  const dispatch = useDispatch();
 
   const likeContents = () => {
     setLike((prev) => !prev);
-    setLikeCount && setLikeCount((prev) => (like ? prev - 1 : prev + 1));
+    console.log(content);
+    if (like) {
+      dispatch(decreaseLike({ content }));
+    } else {
+      dispatch(increaseLike({ content }));
+    }
   };
 
   const openContents = () => {
-    window.open(link);
+    window.open(content.link);
   };
 
   return (
