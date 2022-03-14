@@ -1,18 +1,19 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { exitDetail } from '../redux/reducers/infoDataReducer';
-import { ContentBox } from '../styles/styles';
 import NewContent from './NewContent';
 import MoreContents from './MoreContents';
 import Subscription from './Subscribe';
 import Thumbnail from './Thumbnail';
+import YoutubeDetail from './Detail/YoutubeDetail';
+import OpinionDetail from './Detail/OpinionDetail';
+import InsightDetail from './Detail/InsightDetail';
+import { backgroundColor } from '../styles/colors';
 
 export default function SlidingPage({ tab }) {
   const [showContent, setShowContent] = useState(false);
   const [contentTranslateX, setContentTranslateX] = useState(0);
   const { pages } = useSelector((state) => state.infoData);
-
   useEffect(() => {
     const index = pages.findIndex((page) => page.sector_id === tab);
     setContentTranslateX((index * -100) / pages.length);
@@ -22,15 +23,6 @@ export default function SlidingPage({ tab }) {
       });
     }
   }, [tab, pages]);
-
-  const dispatch = useDispatch();
-  const handleExitDetail = (sectorId) => {
-    dispatch(
-      exitDetail({
-        sectorId,
-      }),
-    );
-  };
 
   return (
     <SlidingView
@@ -50,8 +42,15 @@ export default function SlidingPage({ tab }) {
                 </>
               ) : (
                 <>
-                  <ContentBox>
-                    <div>id: {page.nowShoing}</div>
+                  <DetailBox>
+                    {page.sector_id === 2 ? (
+                      <YoutubeDetail page={page} id={page.nowShoing} />
+                    ) : page.sector_id === 1 ? (
+                      <OpinionDetail />
+                    ) : (
+                      <InsightDetail page={page} id={page.nowShoing} />
+                    )}
+                    {/* <div>id: {page.nowShoing}</div>
                     <div>디테일 페이지 보는중</div>
                     <button
                       onClick={() => {
@@ -59,8 +58,8 @@ export default function SlidingPage({ tab }) {
                       }}
                     >
                       나가기
-                    </button>
-                  </ContentBox>
+                    </button> */}
+                  </DetailBox>
                   <MoreContents page={page} />
                   <Subscription />
                 </>
@@ -79,6 +78,11 @@ const SlidingView = styled.div`
   overflow: hidden;
   transition-duration: 0.2s;
   transform: ${(props) => `translateX(${props.contentTranslateX}%)`};
+`;
+const DetailBox = styled.div`
+  margin: -16px;
+  margin-bottom: 20px;
+  background-color: ${backgroundColor.secondary};
 `;
 
 const RelateView = styled.div`
