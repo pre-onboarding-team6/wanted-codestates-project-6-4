@@ -3,7 +3,7 @@ import { badgeColor } from '../styles/colors';
 import { Badge, ContentBox } from '../styles/styles';
 import Carousel from './Carousel';
 
-const NewContent = ({ news }) => {
+export default function NewContent({ news }) {
   return (
     <Container>
       <Title>
@@ -12,9 +12,7 @@ const NewContent = ({ news }) => {
       <Carousel items={news} />
     </Container>
   );
-};
-
-export default NewContent;
+}
 
 const Container = styled(ContentBox)`
   font-size: 12px;

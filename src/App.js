@@ -16,7 +16,7 @@ import Tabs from './components/Tabs';
 import loader from './assets/loader.png';
 import ErrorPage from './components/ErrorPage';
 
-function App() {
+export default function App() {
   const dispatch = useDispatch();
   const { data, loading, error, pages } = useSelector(
     (state) => state.infoData,
@@ -69,8 +69,6 @@ function App() {
     </>
   );
 }
-
-export default App;
 
 const AppContainer = styled.div`
   display: flex;

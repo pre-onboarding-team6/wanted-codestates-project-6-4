@@ -3,7 +3,7 @@ import { ContentBox, Subscribe } from '../styles/styles';
 import styled from '@emotion/styled';
 import { buttonColor, fontSize, textColor } from '../styles/colors';
 
-const Subscription = (props) => {
+export default function Subscription(props) {
   const openLink = () => {
     window.open('https://sandbank.io');
   };
@@ -23,9 +23,7 @@ const Subscription = (props) => {
       </SubscribeBtn>
     </SubscriptionComponent>
   );
-};
-
-export default Subscription;
+}
 
 const SubscriptionComponent = styled(ContentBox)`
   margin: 1rem 0;
