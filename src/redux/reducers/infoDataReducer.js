@@ -1,12 +1,13 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 
-const PROXY = 'https://cors-anywhere.herokuapp.com';
+export const PROXY = 'https://cors-anywhere.herokuapp.com';
 const BASE_URL = 'https://test.daground.io';
 
 const initialState = {
   data: undefined,
   loading: true,
   error: undefined,
+  pages: [],
 };
 
 export const fetchData = createAsyncThunk(
@@ -33,10 +34,60 @@ export const fetchData = createAsyncThunk(
   },
 );
 
+const createPage = (sector_id, news, content) => {
+  return {
+    sector_id,
+    news,
+    content,
+    nowShoing: undefined,
+  };
+};
+
+const parsePages = (sector, content) => {
+  const newPages = sector.map((item) => {
+    const newsInSector = content.filter(
+      (singleContent) =>
+        singleContent.sector_id === item.id && singleContent.like_top === 1,
+    );
+    const contentInSector = content.filter(
+      (singleContent) => singleContent.sector_id === item.id,
+    );
+    return createPage(item.id, newsInSector, contentInSector);
+  });
+  return newPages;
+};
+
 export const infoDataReducer = createSlice({
   name: 'review',
   initialState,
-  reducers: {},
+  reducers: {
+    showDetail: (state, action) => {
+      const { sectorId, contentId } = action.payload;
+      const { pages } = current(state);
+      const newPages = pages.map((page) => {
+        if (page.sector_id === sectorId) {
+          const newPage = { ...page, nowShoing: contentId };
+          return newPage;
+        } else {
+          return page;
+        }
+      });
+      state.pages = newPages;
+    },
+    exitDetail: (state, action) => {
+      const { sectorId } = action.payload;
+      const { pages } = current(state);
+      const newPages = pages.map((page) => {
+        if (page.sector_id === sectorId) {
+          const newPage = { ...page, nowShoing: undefined };
+          return newPage;
+        } else {
+          return page;
+        }
+      });
+      state.pages = newPages;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
@@ -48,6 +99,11 @@ export const infoDataReducer = createSlice({
           sector: action.payload.sector,
           content: action.payload.content,
         };
+        const newPages = parsePages(
+          action.payload.sector,
+          action.payload.content,
+        );
+        state.pages = newPages;
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;
@@ -59,6 +115,6 @@ export const infoDataReducer = createSlice({
   },
 });
 
-// export const {  } = infoDataReducer.actions;
+export const { showDetail, exitDetail } = infoDataReducer.actions;
 
 export default infoDataReducer.reducer;
