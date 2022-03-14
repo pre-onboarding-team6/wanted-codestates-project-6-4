@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { IPhoneSE } from 'react-device-mockups';
 import 'html5-device-mockups/dist/device-mockups.min.css';
@@ -6,37 +6,69 @@ import 'html5-device-mockups/dist/device-mockups.min.css';
 import { Global } from '@emotion/react';
 import { reset } from './styles/reset';
 import styled from '@emotion/styled';
-import { ContentBox } from './styles/styles';
-import Thumbnail from './components/Thumbnail';
+import { backgroundColor } from './styles/colors';
 
-function App() {
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from './redux/reducers/infoDataReducer';
+import SlidingPage from './components/SlidingPage';
+
+import Tabs from './components/Tabs';
+import loader from './assets/loader.png';
+import ErrorPage from './components/ErrorPage';
+
+export default function App() {
+  const dispatch = useDispatch();
+  const { data, loading, error, pages } = useSelector(
+    (state) => state.infoData,
+  );
+  const [tab, setTab] = useState(0);
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (data && data.sector && data.sector[0]) {
+      setTab(data.sector[0]?.id);
+    }
+  }, [data]);
+
   return (
     <>
       <Global styles={reset} />
       <AppContainer>
         <IPhoneSE
+          width={500}
           color="white"
           buttonProps={{
-            onClick: () => alert('Home Button Clicked!'),
+            onClick: () => dispatch(fetchData()),
           }}
         >
-          <Page>
-            {/* 헤더 */}
-            {/* 내부 */}
-            <ContentContainer>
-              <ContentBox>
-                <div>새로 올라왔어요</div>
-                <Thumbnail src="https://cdn-images-1.medium.com/max/800/1*OBA2wnz9g7IMXoi0sf9ltQ.jpeg" />
-              </ContentBox>
-            </ContentContainer>
-          </Page>
+          <ViewPort>
+            {loading ? (
+              <LoaderContainer>
+                <LoaderBox>
+                  <LoaderImage src={loader} alt="loading" />
+                </LoaderBox>
+              </LoaderContainer>
+            ) : error ? (
+              <ErrorPage error={error} />
+            ) : (
+              <>
+                <Tabs setTab={setTab} sector={data.sector} />
+                <SlidingPage
+                  tab={tab}
+                  sector={data.sector}
+                  content={data.content}
+                />
+              </>
+            )}
+          </ViewPort>
         </IPhoneSE>
       </AppContainer>
     </>
   );
 }
-
-export default App;
 
 const AppContainer = styled.div`
   display: flex;
@@ -44,16 +76,31 @@ const AppContainer = styled.div`
   padding: 2rem;
 `;
 
-const Page = styled.div`
-  background-color: rgba(240, 240, 240);
+const ViewPort = styled.div`
+  background-color: ${backgroundColor.primary};
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  height: 100%;
+  overflow: hidden;
 `;
 
-const ContentContainer = styled.div`
+const LoaderContainer = styled.div`
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
-  padding: 1rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LoaderBox = styled.div`
+  display: block;
+  width: 6rem;
+  height: 6rem;
+`;
+
+const LoaderImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
