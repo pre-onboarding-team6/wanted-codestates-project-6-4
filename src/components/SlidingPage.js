@@ -1,53 +1,40 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { exitDetail } from '../redux/reducers/infoDataReducer';
 import { ContentBox } from '../styles/styles';
+import NewContent from './NewContent';
 import MoreContents from './MoreContents';
+import Subscription from './Subscribe';
 import Thumbnail from './Thumbnail';
 
-class Page {
-  constructor(content) {
-    this.content = content;
-    this.nowShoing = undefined;
-  }
-}
-
-export default function SlidingPage({ tab, sector, content }) {
+export default function SlidingPage({ tab }) {
   const [showContent, setShowContent] = useState(false);
   const [contentTranslateX, setContentTranslateX] = useState(0);
-  const [pages, setPages] = useState([]);
-  console.log(pages);
+  const { pages } = useSelector((state) => state.infoData);
 
   useEffect(() => {
-    const newPages = sector.map((item) => {
-      const contentInSector = content.filter(
-        (singleContent) => singleContent.sector_id === item.id,
-      );
-      return new Page(contentInSector);
-    });
-    setPages(newPages);
-  }, [sector, content]);
-
-  useEffect(() => {
-    const index = sector.findIndex((singleSector) => singleSector.id === tab);
-    setContentTranslateX((index * -100) / sector.length);
+    const index = pages.findIndex((page) => page.sector_id === tab);
+    setContentTranslateX((index * -100) / pages.length);
     if (index >= 0) {
       setTimeout(() => {
         setShowContent(true);
       });
     }
-  }, [tab, sector]);
+  }, [tab, pages]);
 
-  const showDetail = (page, index, contentId) => {
-    const newPage = page;
-    newPage.nowShoing = contentId;
-    const newPages = [...pages];
-    newPages[index] = newPage;
-    setPages(newPages);
+  const dispatch = useDispatch();
+  const handleExitDetail = (sectorId) => {
+    dispatch(
+      exitDetail({
+        sectorId,
+      }),
+    );
   };
 
   return (
     <SlidingView
-      sector={sector.length}
+      pages={pages.length}
       contentTranslateX={contentTranslateX}
       showContent={showContent}
     >
@@ -56,32 +43,28 @@ export default function SlidingPage({ tab, sector, content }) {
           <RelateView key={index}>
             <AbsoluteScrollView>
               {!page.nowShoing ? (
-                page.content.map((item, contentIndex) => (
-                  <ContentBox key={'' + index + contentIndex}>
-                    <div>새로 올라왔어요</div>
+                <>
+                  <NewContent news={page.news} />
+                  <Subscription />
+                  <MoreContents page={page} />
+                </>
+              ) : (
+                <>
+                  <ContentBox>
+                    <div>id: {page.nowShoing}</div>
+                    <div>디테일 페이지 보는중</div>
                     <button
                       onClick={() => {
-                        showDetail(page, index, item.id);
+                        handleExitDetail(page.sector_id);
                       }}
                     >
-                      {item.id} 보기
+                      나가기
                     </button>
                   </ContentBox>
-                ))
-              ) : (
-                <ContentBox>
-                  <div>{page.nowShoing} 보는중</div>
-                  <Thumbnail src="https://cdn-images-1.medium.com/max/800/1*OBA2wnz9g7IMXoi0sf9ltQ.jpeg" />
-                  <button
-                    onClick={() => {
-                      showDetail(page, index);
-                    }}
-                  >
-                    나가기
-                  </button>
-                </ContentBox>
+                  <MoreContents page={page} />
+                  <Subscription />
+                </>
               )}
-              <MoreContents sectorId={index + 1} />
             </AbsoluteScrollView>
           </RelateView>
         ))}
@@ -91,7 +74,7 @@ export default function SlidingPage({ tab, sector, content }) {
 const SlidingView = styled.div`
   flex-grow: 1;
   display: flex;
-  width: ${(props) => props.sector * 100 + '%'};
+  width: ${(props) => props.pages * 100 + '%'};
   height: 100%;
   overflow: hidden;
   transition-duration: 0.2s;

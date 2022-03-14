@@ -3,13 +3,13 @@ import { badgeColor } from '../styles/colors';
 import { Badge, ContentBox } from '../styles/styles';
 import Carousel from './Carousel';
 
-const NewContent = () => {
+const NewContent = ({ news }) => {
   return (
     <Container>
       <Title>
         새로 올라왔어요<Badge color={badgeColor.new}>new</Badge>
       </Title>
-      <Carousel />
+      <Carousel items={news} />
     </Container>
   );
 };

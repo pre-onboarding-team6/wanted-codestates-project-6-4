@@ -18,7 +18,9 @@ import ErrorPage from './components/ErrorPage';
 
 function App() {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.infoData);
+  const { data, loading, error, pages } = useSelector(
+    (state) => state.infoData,
+  );
   const [tab, setTab] = useState(0);
 
   useEffect(() => {

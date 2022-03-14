@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { badgeColor, buttonColor } from '../styles/colors';
 import SlidingContent from './SlidingContent';
 
-const Carousel = () => {
-  const sliderLength = 3;
+const Carousel = ({ items }) => {
+  const sliderLength = items.length;
   const itemRef = useRef(null);
   const [currentItem, setCurrentItem] = useState(0);
 
@@ -21,14 +21,14 @@ const Carousel = () => {
     return () => {
       clearInterval(autoSilde);
     };
-  }, []);
+  }, [sliderLength]);
 
   useEffect(() => {
     itemRef.current.style.transition = 'all 0.5s';
     itemRef.current.style.transform = `translateX(-${
       (currentItem * 100) / sliderLength
     }%)`;
-  }, [currentItem]);
+  }, [currentItem, sliderLength]);
 
   const scrollToItem = (idx) => {
     setCurrentItem(idx);
@@ -38,14 +38,14 @@ const Carousel = () => {
     <Container>
       <SlideContainer>
         <SliderItems ref={itemRef} sliderLength={sliderLength}>
-          {[0, 0, 0].map((item, idx) => (
-            <SlidingContent key={idx} />
+          {items.map((item, idx) => (
+            <SlidingContent key={idx} item={item} />
           ))}
         </SliderItems>
       </SlideContainer>
       <ButtonContainer>
         <Indicator>
-          {[0, 0, 0].map((item, idx) => (
+          {items.map((item, idx) => (
             <Index
               key={idx}
               onClick={() => scrollToItem(idx)}
@@ -68,6 +68,7 @@ const Container = styled.div`
 `;
 
 const SlideContainer = styled.div`
+  width: 100%;
   overflow: hidden;
 `;
 

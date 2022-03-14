@@ -1,65 +1,45 @@
 import styled from '@emotion/styled';
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { showDetail } from '../redux/reducers/infoDataReducer';
 import { fontSize, badgeColor, buttonColor } from '../styles/colors';
 import { Badge, ContentBox } from '../styles/styles';
 
 // sectorId / 1 = opinion, 2 = youtube, 3 = insight
-const MoreContents = ({ sectorId }) => {
-  const {
-    data: { content: contents },
-  } = useSelector((state) => state.infoData);
-
+const MoreContents = ({ page }) => {
   const [section, setSection] = useState('');
   const [badge, setBadge] = useState('');
   const [sectorContents, setSectorContents] = useState([]);
   const [spread, setSpread] = useState(false);
 
+  const dispatch = useDispatch();
+  const handleShowDetail = (sectorId, contentId) => {
+    dispatch(
+      showDetail({
+        sectorId,
+        contentId,
+      }),
+    );
+  };
+
   // title 및 badge 이름 설정
   useEffect(() => {
-    console.log(sectorId);
-    if (sectorId === 2) {
+    if (page.sector_id === 2) {
       setSection('블록체인 NOW');
       setBadge('Youtube');
-    } else if (sectorId === 1) {
+    } else if (page.sector_id === 1) {
       setSection('알쓸B잡');
       setBadge('News');
     } else {
       setSection('어떻게 투자할까');
       setBadge('Report');
     }
-  }, [sectorId]);
+  }, [page]);
 
   // sector에 따라 filtering
   useEffect(() => {
-    if (sectorId === 2) {
-      setSectorContents(
-        spread
-          ? contents.filter((content) => content.sector_id === 2)
-          : contents.filter((content) => content.sector_id === 2).slice(0, 6),
-      );
-    } else if (sectorId === 1) {
-      setSectorContents(
-        spread
-          ? contents.filter((content) => content.sector_id === 1)
-          : contents.filter((content) => content.sector_id === 1).slice(0, 6),
-      );
-    } else {
-      setSectorContents(
-        spread
-          ? contents.filter((content) => content.sector_id === 3)
-          : contents.filter((content) => content.sector_id === 3).slice(0, 6),
-      );
-    }
-  }, [sectorId, contents, spread]);
-
-  const gotoDetail = (link, sectorId) => {
-    // go to Detail
-    const url =
-      sectorId === 2 ? `https://www.youtube.com/watch?v=${link}` : link;
-
-    console.log(url);
-  };
+    setSectorContents(spread ? page.content : page.content.slice(0, 6));
+  }, [spread, page.content]);
 
   const showMore = () => {
     setSpread((prev) => !prev);
@@ -71,9 +51,9 @@ const MoreContents = ({ sectorId }) => {
         <Title>{section}</Title>
         <Badge
           color={
-            sectorId === 1
+            page.sector_id === 1
               ? badgeColor.news
-              : sectorId === 2
+              : page.sector_id === 2
               ? badgeColor.youtube
               : badgeColor.report
           }
@@ -86,7 +66,7 @@ const MoreContents = ({ sectorId }) => {
           index > 2 ? (
             <ContentWrapper
               key={id}
-              onClick={() => gotoDetail(link, sector_id)}
+              onClick={() => handleShowDetail(sector_id, id)}
             >
               <ImgBox>
                 <img src={image} alt={title} />
