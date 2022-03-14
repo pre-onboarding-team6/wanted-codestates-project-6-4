@@ -8,6 +8,7 @@ import { reset } from './styles/reset';
 import styled from '@emotion/styled';
 import { ContentBox } from './styles/styles';
 import Thumbnail from './components/Thumbnail';
+import { backgroundColor } from './styles/colors';
 
 function App() {
   return (
@@ -45,7 +46,7 @@ const AppContainer = styled.div`
 `;
 
 const Page = styled.div`
-  background-color: rgba(240, 240, 240);
+  background-color: ${backgroundColor.primary};
   display: flex;
   flex-direction: column;
   min-height: 100%;
