@@ -48,9 +48,17 @@
 
 `알쓸B잡` `유튜브` `인사이트`
 
+
+![탭](https://user-images.githubusercontent.com/81206124/158330099-6ba300ae-fffd-4eac-b985-8255dcd16bcb.gif)
+
+
 - tab 간 이동시 슬라이딩 애니메이션
 
 ### 2. Tab 별 페이지
+![메인리스트](https://user-images.githubusercontent.com/81206124/158329552-9865a556-0fca-4532-99a2-52418daf1b92.gif) ![상세페이지](https://user-images.githubusercontent.com/81206124/158329763-3c6975eb-4b89-40c1-8ba5-21cd529cf089.gif) ![좋아요](https://user-images.githubusercontent.com/81206124/158329828-14500120-6774-47f4-b3bc-f7cc71acc75e.gif)
+
+
+
 1. 메인 리스트 페이지
     - [새로 올라왔어요] Carousel View 구현
     - [구독하기]버튼 클릭 시 https://sandbank.io로 새 창 열림
