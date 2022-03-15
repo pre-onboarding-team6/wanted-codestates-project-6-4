@@ -53,7 +53,7 @@ export default function SlidingPage({ tab }) {
                   {page.sector_id !== 1 && (
                     <>
                       <PaddingBox>
-                        <MoreContents page={page} />
+                        <MoreContents page={page} id={page.nowShoing} />
                         <Subscription />
                       </PaddingBox>
                     </>
