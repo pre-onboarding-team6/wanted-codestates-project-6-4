@@ -31,6 +31,7 @@ export default function YoutubeDetail({ page, id }) {
         shareText={'공유하기'}
         fontSize={fontSize.sm}
         iconSize={fontSize.sm}
+        content={detailPage[0]}
       />
     </DetailContainer>
   );
