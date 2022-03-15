@@ -8,8 +8,8 @@ import DetailTitle from './DetailTitle';
 export default function InsightDetail({ page, id }) {
   const ref = useRef(null);
   const detailPage = page.content.filter((content) => content.id === id);
-  const openLink = () => {
-    window.open('');
+  const openReport = () => {
+    window.open(`${detailPage[0].link}`);
   };
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function InsightDetail({ page, id }) {
       <SubscribeBtn
         color={buttonColor.secondary}
         fontSize={fontSize.base}
-        onClick={openLink}
+        onClick={openReport}
       >
         전체 리포트 읽기
       </SubscribeBtn>
@@ -36,6 +36,7 @@ export default function InsightDetail({ page, id }) {
         shareText={'공유하기'}
         fontSize={fontSize.sm}
         iconSize={fontSize.sm}
+        content={detailPage[0]}
       />
     </DetailContainer>
   );
