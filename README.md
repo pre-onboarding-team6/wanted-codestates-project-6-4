@@ -1,44 +1,58 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# [**Project 7**] 디에이그라운드 실습 과제
+## 🔗 배포 주소
 
-## Available Scripts
+- 아래 URL을 클릭하면 배포된 페이지로 이동합니다.
+    
+    [https://daground-sandbank.netlify.app/](https://daground-sandbank.netlify.app/)
+    
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+## **⚙**개발 환경
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/Styled%20Components-DB7093?style=for-the-badge&logo=StyledComponents&logoColor=white"/></a>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<br>
 
-### `npm test`
+## 👫 참여 멤버
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 손한빈:  탭 컨테이너 컴포넌트, 리덕스 모듈
+- 김도연 : 새로 올라왔어요 컴포넌트(캐러셀)
+- 유지수 : 콘텐츠 더보기 컴포넌트
+- 박세은 : 디테일 컴포넌트
+- 유혜정:  구독하기,좋아요 & 공유하기 버튼 컴포넌트
 
-### `npm run build`
+<br>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🕹 설치 및 시작방법
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
+# install dependencies
+ $ npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# serve with hot reload at localhost:8888
+ $ npm start
+```
 
-### `npm run eject`
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🖥️ 구현 목록
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<aside>
+💡 샌드뱅크 모바일 앱 내 인포탭을 참고하여 웹으로 변환 제작
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+</aside>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 1. 상단 Tab bar
 
-## Learn More
+`알쓸B잡` `유튜브` `인사이트`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- tab 간 이동시 슬라이딩 애니메이션
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2. Tab 별 페이지
+
+- 메인 리스트 페이지
+- 컨텐츠 상세페이지 및 영상 재생
+- 미디엄링크 또는 노션 바로가기
+- 좋아요, 공유하기
