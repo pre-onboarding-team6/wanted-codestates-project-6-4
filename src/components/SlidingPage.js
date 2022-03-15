@@ -35,11 +35,11 @@ export default function SlidingPage({ tab }) {
           <RelateView key={index}>
             <AbsoluteScrollView>
               {!page.nowShoing ? (
-                <>
+                <PaddingBox>
                   <NewContent news={page.news} />
                   <Subscription />
                   <MoreContents page={page} />
-                </>
+                </PaddingBox>
               ) : (
                 <>
                   <DetailBox shouldMargin={page.sector_id !== 1}>
@@ -53,8 +53,10 @@ export default function SlidingPage({ tab }) {
                   </DetailBox>
                   {page.sector_id !== 1 && (
                     <>
-                      <MoreContents page={page} id={page.nowShoing} />
-                      <Subscription />
+                      <PaddingBox>
+                        <MoreContents page={page} />
+                        <Subscription />
+                      </PaddingBox>
                     </>
                   )}
                 </>
@@ -74,10 +76,10 @@ const SlidingView = styled.div`
   transition-duration: 0.2s;
   transform: ${(props) => `translateX(${props.contentTranslateX}%)`};
 `;
+
 const DetailBox = styled.div`
   height: ${(props) => (props.shouldMargin ? 'auto' : '100%')};
-  margin: ${(props) => (props.shouldMargin ? '-16px' : '-1rem')};
-  margin-bottom: ${(props) => (props.shouldMargin ? '20px' : '-1rem')};
+  margin-bottom: ${(props) => (props.shouldMargin ? '20px' : '0')};
   background-color: ${backgroundColor.secondary};
 `;
 
@@ -93,7 +95,13 @@ const AbsoluteScrollView = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 1rem;
   overflow-x: hidden;
   overflow-y: auto;
+`;
+
+const PaddingBox = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;

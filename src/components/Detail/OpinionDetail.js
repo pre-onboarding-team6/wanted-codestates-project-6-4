@@ -40,7 +40,7 @@ const DetailContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  height: calc(100% + 2rem);
+  height: 100%;
 `;
 
 const Iframe = styled.iframe`
