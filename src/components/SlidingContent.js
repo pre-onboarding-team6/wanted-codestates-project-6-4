@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import { forwardRef } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { showDetail } from '../redux/reducers/infoDataReducer';
 import Thumbnail from './Thumbnail';
 
-export default forwardRef(function SlidingContent({ item }, ref) {
+export default React.memo(function SlidingContent({ item }) {
   const dispatch = useDispatch();
   const handleShowDetail = () => {
     dispatch(
@@ -21,7 +21,7 @@ export default forwardRef(function SlidingContent({ item }, ref) {
         src={item.image}
         onError={(event) => {
           event.target.src =
-            'https://cdn-images-1.medium.com/max/800/1*OBA2wnz9g7IMXoi0sf9ltQ.jpeg';
+            'https://dummyimage.com/600x400/cfd6f9/487ff7.jpg&text=Sandbank';
         }}
         onClick={() => {
           handleShowDetail();
@@ -41,18 +41,27 @@ export default forwardRef(function SlidingContent({ item }, ref) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   padding: 3px;
+  cursor: pointer;
 `;
 
-const Image = styled(Thumbnail)``;
+const Image = styled(Thumbnail)`
+  &:hover {
+    opacity: 0.85;
+  }
+`;
 
 const ContentTitle = styled.div`
-  margin-top: 6px;
   background: white;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  padding: 9px 6px;
+  margin-top: 0.6rem;
+  padding: 1rem 0.8rem;
+
   font-weight: 600;
+  line-height: 1rem;
+  &:hover {
+    background: rgb(0, 0, 0, 0.03);
+  }
 `;
