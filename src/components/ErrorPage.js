@@ -8,6 +8,7 @@ export default function ErrorPage({ error }) {
       <SubTitle>
         <mark>https://cors-anywhere.herokuapp.com/corsdemo</mark>
       </SubTitle>
+      <SubTitle>버튼을 누른 뒤 새로고침 하세요.</SubTitle>
       <Iframe
         title="showcase"
         src="https://cors-anywhere.herokuapp.com/corsdemo"
@@ -37,6 +38,7 @@ const SubTitle = styled.h2`
   font-size: ${fontSize.base};
   font-weight: 500;
   text-align: center;
+  margin-top: 1rem;
 `;
 
 const Iframe = styled.iframe`
