@@ -44,22 +44,18 @@ export default function LikeShare({
 
   return (
     <Container>
-      <LikeIcon id="likeBtn" onClick={likeContents}>
+      <LikeIcon onClick={likeContents}>
         {like ? (
           <LikeFull width={iconSize} height={iconSize} fill="red" />
         ) : (
           <Like width={iconSize} height={iconSize} />
         )}
+        <Text textSize={fontSize}>{likeText}</Text>
       </LikeIcon>
-      <Label htmlFor="likeBtn" textSize={fontSize}>
-        {likeText}
-      </Label>
-      <ShareIcon id="shareBtn" onClick={openContents}>
+      <ShareIcon onClick={openContents}>
         <Share width={iconSize} height={iconSize} />
+        <Text textSize={fontSize}>{shareText}</Text>
       </ShareIcon>
-      <Label htmlFor="likeBtn" textSize={fontSize}>
-        {shareText}
-      </Label>
     </Container>
   );
 }
@@ -72,9 +68,10 @@ const Container = styled.div`
   color: ${textColor.secondary};
 `;
 
-const Label = styled.label`
+const Text = styled.span`
   font-size: ${(props) => props.textSize};
   margin-left: 2px;
+  color: ${textColor.secondary};
 `;
 
 const LikeIcon = styled.button`
