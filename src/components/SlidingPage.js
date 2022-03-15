@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import NewContent from './NewContent';
 import MoreContents from './MoreContents';
 import Subscription from './Subscribe';
-import Thumbnail from './Thumbnail';
 import YoutubeDetail from './Detail/YoutubeDetail';
 import OpinionDetail from './Detail/OpinionDetail';
 import InsightDetail from './Detail/InsightDetail';
