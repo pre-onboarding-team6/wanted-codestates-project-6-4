@@ -6,7 +6,6 @@ import { fontSize, badgeColor, buttonColor } from '../styles/colors';
 import { Badge, ContentBox } from '../styles/styles';
 import LikeShare from './LikeShare';
 
-// sectorId / 1 = opinion, 2 = youtube, 3 = insight
 export default function MoreContents({ page }) {
   const [section, setSection] = useState('');
   const [badge, setBadge] = useState('');
@@ -92,6 +91,11 @@ const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 410px) {
+    justify-content: center;
+    flex-direction: column;
+  }
 `;
 
 const Title = styled.h2`
@@ -99,6 +103,10 @@ const Title = styled.h2`
   font-size: ${fontSize.md};
   margin-right: 0.8rem;
   white-space: nowrap;
+
+  @media (max-width: 410px) {
+    margin-right: 0;
+  }
 `;
 
 const ContentWrapper = styled.div`
