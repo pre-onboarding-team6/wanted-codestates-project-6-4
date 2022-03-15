@@ -28,7 +28,9 @@ export default function LikeShare({
   };
 
   const openContents = () => {
-    window.open(content.link);
+    content?.sector_id === 2
+      ? window.open(`https://www.youtube.com/watch?v=${content.link}`)
+      : window.open(content.link);
   };
 
   return (
