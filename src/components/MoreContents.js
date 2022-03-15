@@ -6,7 +6,7 @@ import { fontSize, badgeColor, buttonColor } from '../styles/colors';
 import { Badge, ContentBox } from '../styles/styles';
 import LikeShare from './LikeShare';
 
-export default function MoreContents({ page }) {
+export default function MoreContents({ page, id }) {
   const [section, setSection] = useState('');
   const [badge, setBadge] = useState('');
   const [sectorContents, setSectorContents] = useState([]);
@@ -38,8 +38,11 @@ export default function MoreContents({ page }) {
 
   // sector에 따라 filtering
   useEffect(() => {
-    setSectorContents(spread ? page.content : page.content.slice(0, 6));
-  }, [spread, page.content]);
+    const presentFilteredContents = page.content.filter((el) => el.id !== id);
+    setSectorContents(
+      spread ? presentFilteredContents : presentFilteredContents.slice(0, 6),
+    );
+  }, [spread, page.content, id]);
 
   const showMore = () => {
     setSpread((prev) => !prev);

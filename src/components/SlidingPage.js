@@ -60,7 +60,7 @@ export default function SlidingPage({ tab }) {
                       나가기
                     </button> */}
                   </DetailBox>
-                  <MoreContents page={page} />
+                  <MoreContents page={page} id={page.nowShoing} />
                   <Subscription />
                 </>
               )}
