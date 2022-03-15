@@ -78,7 +78,7 @@ const Container = styled.div`
 `;
 
 const SlideContainer = styled.div`
-  width: 100%;
+  width: 95%;
   overflow: hidden;
 `;
 
@@ -92,7 +92,7 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 1.1rem;
+  margin-top: 0.7rem;
 `;
 
 const Indicator = styled.div`
