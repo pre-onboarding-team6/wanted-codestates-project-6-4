@@ -58,7 +58,7 @@
 
 
 ### 2. Tab 별 페이지
-![메인페이지](https://user-images.githubusercontent.com/81206124/158334974-8ae36cdb-4dd8-4155-ab89-b574a8534f04.gif)![상세페이지](https://user-images.githubusercontent.com/81206124/158334390-6ae4793d-a62e-44ff-9968-089d1f358497.gif) ![좋아요](https://user-images.githubusercontent.com/81206124/158329828-14500120-6774-47f4-b3bc-f7cc71acc75e.gif)
+![메인페이지](https://user-images.githubusercontent.com/81206124/158335731-fcd0ff4f-9de6-4944-b94c-c4c334a92e90.gif)![상세페이지](https://user-images.githubusercontent.com/81206124/158334390-6ae4793d-a62e-44ff-9968-089d1f358497.gif) ![좋아요](https://user-images.githubusercontent.com/81206124/158329828-14500120-6774-47f4-b3bc-f7cc71acc75e.gif)
 
 
 
