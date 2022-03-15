@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import NewContent from './NewContent';
 import MoreContents from './MoreContents';
 import Subscription from './Subscribe';
