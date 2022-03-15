@@ -44,15 +44,25 @@ const Container = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: 3px;
+  cursor: pointer;
 `;
 
-const Image = styled(Thumbnail)``;
+const Image = styled(Thumbnail)`
+  &:hover {
+    opacity: 0.85;
+  }
+`;
 
 const ContentTitle = styled.div`
   margin-top: 6px;
   background: white;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  padding: 9px 6px;
+  padding: 1rem 0.8rem;
   font-weight: 600;
+  line-height: 1rem;
+  letter-spacing: 0.04rem;
+  &:hover {
+    background: rgb(0, 0, 0, 0.03);
+  }
 `;
