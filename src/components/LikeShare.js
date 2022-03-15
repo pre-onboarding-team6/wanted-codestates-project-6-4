@@ -8,17 +8,6 @@ import { textColor } from '../styles/colors';
 import { decreaseLike, increaseLike } from '../redux/reducers/infoDataReducer';
 import { useDispatch } from 'react-redux';
 
-// 새로 올라왔어요 컴포넌트는 기본으로 사용 <LikeShare />
-
-// 디테일 페이지 fontSize, iconSize는 둘다 base
-// 디테일 페이지 likeText="좋아요", shareText="공유하기"
-
-// link는 컨텐츠 url ex.) link="https://sandbank.io"
-
-// 더보기 컴포넌트 fontSize, iconSize는 둘다 sm
-// 디테일 페이지 likeText={likeCount}, shareText="공유하기"
-// 더보기 컴포넌트는 likeCount set함수 필요(setLikeCount)
-
 export default function LikeShare({
   likeText,
   shareText,
@@ -44,22 +33,18 @@ export default function LikeShare({
 
   return (
     <Container>
-      <LikeIcon id="likeBtn" onClick={likeContents}>
+      <LikeIcon onClick={likeContents}>
         {like ? (
           <LikeFull width={iconSize} height={iconSize} fill="red" />
         ) : (
           <Like width={iconSize} height={iconSize} />
         )}
+        <Text textSize={fontSize}>{likeText}</Text>
       </LikeIcon>
-      <Label htmlFor="likeBtn" textSize={fontSize}>
-        {likeText}
-      </Label>
-      <ShareIcon id="shareBtn" onClick={openContents}>
+      <ShareIcon onClick={openContents}>
         <Share width={iconSize} height={iconSize} />
+        <Text textSize={fontSize}>{shareText}</Text>
       </ShareIcon>
-      <Label htmlFor="likeBtn" textSize={fontSize}>
-        {shareText}
-      </Label>
     </Container>
   );
 }
@@ -72,9 +57,10 @@ const Container = styled.div`
   color: ${textColor.secondary};
 `;
 
-const Label = styled.label`
+const Text = styled.span`
   font-size: ${(props) => props.textSize};
   margin-left: 2px;
+  color: ${textColor.secondary};
 `;
 
 const LikeIcon = styled.button`

@@ -42,26 +42,21 @@ export default function SlidingPage({ tab }) {
                 </>
               ) : (
                 <>
-                  <DetailBox>
+                  <DetailBox shouldMargin={page.sector_id !== 1}>
                     {page.sector_id === 2 ? (
                       <YoutubeDetail page={page} id={page.nowShoing} />
                     ) : page.sector_id === 1 ? (
-                      <OpinionDetail />
+                      <OpinionDetail page={page} id={page.nowShoing} />
                     ) : (
                       <InsightDetail page={page} id={page.nowShoing} />
                     )}
-                    {/* <div>id: {page.nowShoing}</div>
-                    <div>디테일 페이지 보는중</div>
-                    <button
-                      onClick={() => {
-                        handleExitDetail(page.sector_id);
-                      }}
-                    >
-                      나가기
-                    </button> */}
                   </DetailBox>
-                  <MoreContents page={page} />
-                  <Subscription />
+                  {page.sector_id !== 1 && (
+                    <>
+                      <MoreContents page={page} id={page.nowShoing} />
+                      <Subscription />
+                    </>
+                  )}
                 </>
               )}
             </AbsoluteScrollView>
@@ -80,8 +75,9 @@ const SlidingView = styled.div`
   transform: ${(props) => `translateX(${props.contentTranslateX}%)`};
 `;
 const DetailBox = styled.div`
-  margin: -16px;
-  margin-bottom: 20px;
+  height: ${(props) => (props.shouldMargin ? 'auto' : '100%')};
+  margin: ${(props) => (props.shouldMargin ? '-16px' : '-1rem')};
+  margin-bottom: ${(props) => (props.shouldMargin ? '20px' : '-1rem')};
   background-color: ${backgroundColor.secondary};
 `;
 
