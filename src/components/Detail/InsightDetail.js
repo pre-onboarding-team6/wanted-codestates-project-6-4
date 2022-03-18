@@ -1,15 +1,19 @@
 import styled from '@emotion/styled';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { backgroundColor, buttonColor, fontSize } from '../../styles/colors';
 import { Subscribe } from '../../styles/styles';
 import LikeShare from '../LikeShare';
 import DetailTitle from './DetailTitle';
+import NotionDetail from './NotionDetail';
 
 export default function InsightDetail({ page, id }) {
+  const [isShow, setIsShow] = useState(false);
+
   const ref = useRef(null);
   const detailPage = page.content.filter((content) => content.id === id);
-  const openReport = () => {
-    window.open(`${detailPage[0].link}`);
+  const handleReport = () => {
+    setIsShow((prev) => !prev);
+    ref.current?.scrollIntoView();
   };
 
   useEffect(() => {
@@ -18,26 +22,39 @@ export default function InsightDetail({ page, id }) {
 
   return (
     <DetailContainer ref={ref}>
-      <DetailTitle sectorId={3} />
-      <ContentTitle>{detailPage[0].title}</ContentTitle>
-      <ImageContainer>
-        <Image src={detailPage[0].image} alt={detailPage[0].title} />
-      </ImageContainer>
-      <Content>{detailPage[0].body}</Content>
-      <SubscribeBtn
-        color={buttonColor.secondary}
-        fontSize={fontSize.base}
-        onClick={openReport}
-      >
-        전체 리포트 읽기
-      </SubscribeBtn>
-      <LikeShare
-        likeText={'좋아요'}
-        shareText={'공유하기'}
-        fontSize={fontSize.sm}
-        iconSize={fontSize.sm}
-        content={detailPage[0]}
-      />
+      {isShow ? (
+        <>
+          <DetailTitle sectorId={4} clonseReport={handleReport} />
+          <NotionDetail
+            notionId={detailPage[0].link.slice(
+              detailPage[0].link.lastIndexOf('-') + 1,
+            )}
+          />
+        </>
+      ) : (
+        <>
+          <DetailTitle sectorId={3} />
+          <ContentTitle>{detailPage[0].title}</ContentTitle>
+          <ImageContainer>
+            <Image src={detailPage[0].image} alt={detailPage[0].title} />
+          </ImageContainer>
+          <Content>{detailPage[0].body}</Content>
+          <SubscribeBtn
+            color={buttonColor.secondary}
+            fontSize={fontSize.base}
+            onClick={handleReport}
+          >
+            전체 리포트 읽기
+          </SubscribeBtn>
+          <LikeShare
+            likeText={'좋아요'}
+            shareText={'공유하기'}
+            fontSize={fontSize.sm}
+            iconSize={fontSize.sm}
+            content={detailPage[0]}
+          />
+        </>
+      )}
     </DetailContainer>
   );
 }
@@ -47,6 +64,7 @@ const DetailContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 30px;
+  min-height: fit-content;
 `;
 
 const ContentTitle = styled.div`
