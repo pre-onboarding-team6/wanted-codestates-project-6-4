@@ -4,9 +4,13 @@ import ChevronLeft from '../../icons/ChevronLeft';
 import { exitDetail } from '../../redux/reducers/infoDataReducer';
 import { fontSize } from '../../styles/colors';
 
-export default function DetailTitle({ sectorId }) {
+export default function DetailTitle({ sectorId, clonseReport }) {
   const dispatch = useDispatch();
   const handleExitDetail = (sectorId) => {
+    if (sectorId === 4) {
+      clonseReport();
+      return;
+    }
     dispatch(
       exitDetail({
         sectorId,
@@ -28,7 +32,9 @@ export default function DetailTitle({ sectorId }) {
           ? '블록체인 NOW'
           : sectorId === 1
           ? '알쓸B잡'
-          : '어떻게 투자할까'}
+          : sectorId === 3
+          ? '어떻게 투자할까'
+          : '리포트 본문'}
       </SectorTitle>
     </SectorTitleWrap>
   );
